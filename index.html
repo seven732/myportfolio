@@ -478,7 +478,7 @@ footer span {
 
   <div class="hero-bottom">
     <p class="hero-desc">
-      专注品牌视觉、UI 设计与海报创作。<br>
+      品牌视觉、UI 设计与海报创作。<br>
       相信好的设计不只是好看，而是让每一个细节都在说话。
     </p>
     <a href="#works" class="hero-scroll">
@@ -500,11 +500,11 @@ footer span {
     <li class="work-item" data-id="1" onclick="togglePreview(this)">
       <span class="work-num">01</span>
       <div class="work-info">
-        <div class="work-name">自创品牌设计</div>
+        <div class="work-name">原创品牌设计</div>
         <div class="work-tags">
+          <span class="work-tag">新媒体运营</span>
           <span class="work-tag">品牌设计</span>
           <span class="work-tag">Logo</span>
-          <span class="work-tag">VI 系统</span>
         </div>
       </div>
       <span class="work-arrow">↗</span>
@@ -523,6 +523,7 @@ footer span {
         <div class="work-name">小程序 UI 设计</div>
         <div class="work-tags">
           <span class="work-tag">UI 设计</span>
+          <span class="work-tag">IP 形象设计</span>
           <span class="work-tag">小程序</span>
           <span class="work-tag">交互</span>
         </div>
@@ -558,8 +559,9 @@ footer span {
     <li class="work-item" data-id="4" onclick="togglePreview(this)">
       <span class="work-num">04</span>
       <div class="work-info">
-        <div class="work-name">海报设计</div>
+        <div class="work-name">其他设计</div>
         <div class="work-tags">
+          <span class="work-tag">书籍装帧</span>
           <span class="work-tag">海报</span>
           <span class="work-tag">视觉创意</span>
           <span class="work-tag">排版</span>
@@ -585,10 +587,10 @@ footer span {
       用设计解决<br>真实的问题
     </h2>
     <p class="about-text">
-      我是 王佳琦，一名视觉设计师，专注于品牌形象、界面设计与创意视觉的探索。
+      我是 王佳琦，一名视觉设计师，专注于品牌形象、创意视觉与界面设计的探索。
     </p>
     <p class="about-text">
-      喜欢在克制的形式里找到最有力的表达——不依赖装饰，只靠结构、排版和细节本身说话。
+      喜欢在克制与灵动之间寻找平衡——拒绝无意义的堆砌，注重排版与结构的合理性，用有温度的细节和恰到好处的视觉为内容服务。
     </p>
   </div>
   <div class="about-right">
@@ -600,7 +602,7 @@ footer span {
       <div class="skill-row">海报创意</div>
       <div class="skill-row">VI 规范手册</div>
       <div class="skill-row">排版设计</div>
-      <div class="skill-row">Figma</div>
+      <div class="skill-row">3D建模</div>
       <div class="skill-row">Adobe 全家桶</div>
     </div>
   </div>
@@ -610,13 +612,34 @@ footer span {
 <section id="contact" class="contact-section">
   <p class="contact-label">Contact</p>
   <h2 class="contact-title">
-    感谢观看，<br>欢迎<em>找我聊</em>
+    感谢观看，<br>期待加入</em>
   </h2>
   <div class="contact-links">
-    <a href="mailto:jseven0803@163.com" class="contact-link">邮件</a>
-    <a href="https://www.xiaohongshu.com/user/profile/jseven_n77" class="contact-link">小红书</a>
-    <a href="#" class="contact-link">微信</a>
+    <a href=" " class="contact-link" onclick="showEmail(event)">邮件</a>
+    <a href="#" class="contact-link" onclick="showWechat(event)">微信</a>
+    <a href=https://www.xiaohongshu.com/user/profile/64f31f250000000005002675 class="contact-link">小红书</a>
   </div>
+
+<!-- 邮件弹窗 -->
+<div id="email-modal" onclick="closeModal('email-modal')" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+  <div onclick="event.stopPropagation()" style="background:#fff;padding:2.5rem 3rem;border-radius:4px;text-align:center;max-width:360px;width:90%;">
+    <p style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#767676;margin-bottom:1rem;">Email</p >
+    <p style="font-family:'DM Serif Display',serif;font-size:1.1rem;letter-spacing:0.02em;margin-bottom:1.5rem;user-select:all;">jseven0803@163.com</p >
+    <p style="font-size:0.75rem;color:#767676;">长按或选中可复制</p >
+    <button onclick="closeModal('email-modal')" style="margin-top:1.5rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;background:none;border:1px solid #E8E8E8;padding:0.5rem 1.5rem;cursor:pointer;color:#111;">关闭</button>
+  </div>
+</div>
+
+<!-- 微信弹窗 -->
+<div id="wechat-modal" onclick="closeModal('wechat-modal')" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+  <div onclick="event.stopPropagation()" style="background:#fff;padding:2.5rem 3rem;border-radius:4px;text-align:center;max-width:320px;width:90%;">
+    <p style="font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:#767676;margin-bottom:1rem;">WeChat</p >
+    <p style="font-family:'DM Serif Display',serif;font-size:1.1rem;margin-bottom:1.25rem;">微信号：Jseven_n77</p >
+    <img src="images/wechat-qr.jpg" alt="微信二维码" style="width:200px;height:200px;object-fit:cover;border:1px solid #E8E8E8;">
+    <p style="font-size:0.75rem;color:#767676;margin-top:1rem;">扫码添加微信</p >
+    <button onclick="closeModal('wechat-modal')" style="margin-top:1.5rem;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;background:none;border:1px solid #E8E8E8;padding:0.5rem 1.5rem;cursor:pointer;color:#111;">关闭</button>
+  </div>
+</div>
 </section>
 
 <!-- FOOTER -->
@@ -647,6 +670,18 @@ footer span {
       setTimeout(() => preview.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
     }
   }
+  function showEmail(e) {
+  e.preventDefault();
+  document.getElementById('email-modal').style.display = 'flex';
+  }
+  function showWechat(e) {
+  e.preventDefault();
+  document.getElementById('wechat-modal').style.display = 'flex';
+  }
+  function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+
 </script>
 </body>
 </html>
