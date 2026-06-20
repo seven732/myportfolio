@@ -8,226 +8,82 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --white: #FFFFFF;
-  --black: #111111;
-  --gray: #767676;
-  --line: #E8E8E8;
+  --white: #FFFFFF; --black: #111111; --gray: #767676; --line: #E8E8E8;
   --serif: 'DM Serif Display', Georgia, serif;
   --sans: 'DM Sans', system-ui, sans-serif;
 }
-body {
-  background: var(--white);
-  color: var(--black);
-  font-family: var(--sans);
-  font-weight: 300;
-  line-height: 1.6;
-}
+body { background: var(--white); color: var(--black); font-family: var(--sans); font-weight: 300; }
 
-/* NAV */
 nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
   padding: 1.75rem 3.5rem;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(16px);
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
 }
-.nav-logo {
-  font-family: var(--serif);
-  font-size: 1.25rem;
-  color: var(--black);
-  text-decoration: none;
-}
-.nav-back {
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: color 0.2s;
-}
+.nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--black); text-decoration: none; }
+.nav-back { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
 .nav-back:hover { color: var(--black); }
 
-/* HERO */
-.project-hero {
-  padding: 8rem 3.5rem 4rem;
-  border-bottom: 1px solid var(--line);
+.project-hero { padding: 8rem 3.5rem 4rem; border-bottom: 1px solid var(--line); }
+.project-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.5rem; }
+.project-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.05; margin-bottom: 2rem; }
+.project-meta { display: flex; gap: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.meta-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem; }
+.meta-value { font-size: 0.88rem; color: var(--black); }
+
+.image-wrap { position: relative; width: 100%; display: block; line-height: 0; }
+.project-image { width: 100%; display: block; }
+
+.overlay { position: absolute; overflow: hidden; }
+
+/* 框1: 收货地址 top:39.73% height:7.95% left:34.85% width:39.05% */
+.overlay-map {
+  top: 36%; left: 32%; width: 39.05%; height: 7.95%;
 }
-.project-label {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 1.5rem;
-}
-.project-title {
-  font-family: var(--serif);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 400;
-  line-height: 1.05;
-  margin-bottom: 2rem;
-}
-.project-meta {
-  display: flex;
-  gap: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--line);
-}
-.meta-item {}
-.meta-label {
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 0.4rem;
-}
-.meta-value {
-  font-size: 0.88rem;
-  color: var(--black);
+.overlay-map iframe { width: 100%; height: 100%; border: none; display: block; }
+
+/* 框2: 数据成果 top:75.67% height:13.53% left:50.00% width:85.38% */
+.overlay-data {
+  top: 75.67%; left: 50.00%; width: 85.38%; height: 13.53%;
+  background: #fff;
+  display: flex; align-items: stretch;
 }
 
-/* LONG IMAGE */
-.project-image {
-  width: 100%;
-  display: block;
-  border-bottom: 1px solid var(--line);
+.metrics-inline {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  width: 100%; height: 100%;
 }
+.mg {
+  padding: 3% 4%; border-right: 1px solid var(--line);
+  display: flex; flex-direction: column;
+}
+.mg:last-child { border-right: none; }
+.mg-label {
+  font-size: clamp(5px, 0.7vw, 10px); letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gray);
+  border-bottom: 1px solid var(--line); padding-bottom: 5%; margin-bottom: 4%;
+}
+.mg-items { display: flex; flex-direction: column; justify-content: space-around; flex: 1; }
+.mi { display: flex; align-items: baseline; gap: 3%; opacity: 0; transform: translateY(5px); transition: opacity 0.4s ease, transform 0.4s ease; }
+.mi.visible { opacity: 1; transform: translateY(0); }
+.mn { font-family: var(--serif); font-size: clamp(9px, 1.5vw, 20px); line-height: 1; color: var(--black); }
+.mu { font-size: clamp(6px, 0.8vw, 11px); color: var(--gray); }
+.md { font-size: clamp(5px, 0.6vw, 9px); color: var(--gray); }
 
-/* INTERACTIVE DATA SECTION */
-.data-section {
-  padding: 5rem 3.5rem;
-  border-bottom: 1px solid var(--line);
-}
-.section-eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 1rem;
-}
-.section-title {
-  font-family: var(--serif);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  font-weight: 400;
-  margin-bottom: 3rem;
-}
-
-/* METRICS GRID */
-.metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-.metric-group {
-  padding: 2.5rem 2rem;
-  border-right: 1px solid var(--line);
-}
-.metric-group:last-child { border-right: none; }
-.metric-group-label {
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gray);
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--line);
-}
-.metric-item {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.metric-item.visible { opacity: 1; transform: translateY(0); }
-.metric-item:last-child { margin-bottom: 0; }
-.metric-num {
-  font-family: var(--serif);
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 1;
-  color: var(--black);
-}
-.metric-unit { font-size: 1rem; color: var(--gray); }
-.metric-desc { font-size: 0.8rem; color: var(--gray); }
-
-/* HIGHLIGHT */
-.highlight-bar {
-  background: #F5F5F5;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 1.5rem 2rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.88rem;
-  color: var(--gray);
-  line-height: 1.7;
-}
-.highlight-bar strong { color: var(--black); }
-
-/* MAP SECTION */
-.map-section {
-  padding: 5rem 3.5rem;
-  border-bottom: 1px solid var(--line);
-}
-.map-embed {
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  overflow: hidden;
-  height: 500px;
-  margin-top: 2rem;
-}
-.map-embed iframe {
-  width: 100%; height: 100%; border: none; display: block;
-}
-
-/* BACK LINK */
-.back-section {
-  padding: 4rem 3.5rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
+.back-section { padding: 4rem 3.5rem; border-top: 1px solid var(--line); }
 .back-link {
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--gray);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: color 0.2s;
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.75rem; transition: color 0.2s;
 }
 .back-link:hover { color: var(--black); }
-.back-line {
-  width: 3rem; height: 1px;
-  background: currentColor;
-  transition: width 0.3s;
-}
+.back-line { width: 3rem; height: 1px; background: currentColor; transition: width 0.3s; }
 .back-link:hover .back-line { width: 5rem; }
 
 @media (max-width: 768px) {
   nav { padding: 1.25rem 1.5rem; }
   .project-hero { padding: 7rem 1.5rem 3rem; }
-  .project-meta { flex-wrap: wrap; gap: 1.5rem; }
-  .data-section, .map-section { padding: 3rem 1.5rem; }
-  .metrics-grid { grid-template-columns: 1fr; }
-  .metric-group { border-right: none; border-bottom: 1px solid var(--line); }
-  .metric-group:last-child { border-bottom: none; }
   .back-section { padding: 3rem 1.5rem; }
 }
 </style>
@@ -239,125 +95,70 @@ nav {
   <a href="index.html" class="nav-back">← 返回作品集</a>
 </nav>
 
-<!-- HERO -->
 <div class="project-hero">
   <p class="project-label">01 · 原创品牌设计</p>
   <h1 class="project-title">奇什么怪<br><em style="font-style:italic;color:var(--gray);">Qishenmeguai</em></h1>
   <div class="project-meta">
-    <div class="meta-item">
-      <div class="meta-label">类型</div>
-      <div class="meta-value">品牌设计 · 新媒体运营</div>
-    </div>
-    <div class="meta-item">
-      <div class="meta-label">时间</div>
-      <div class="meta-value">2025.04 – 至今</div>
-    </div>
-    <div class="meta-item">
-      <div class="meta-label">平台</div>
-      <div class="meta-value">小红书</div>
-    </div>
-    <div class="meta-item">
-      <div class="meta-label">角色</div>
-      <div class="meta-value">创始人 · 独立运营</div>
-    </div>
+    <div><div class="meta-label">类型</div><div class="meta-value">品牌设计 · 新媒体运营</div></div>
+    <div><div class="meta-label">时间</div><div class="meta-value">2025.04 – 至今</div></div>
+    <div><div class="meta-label">平台</div><div class="meta-value">小红书</div></div>
+    <div><div class="meta-label">角色</div><div class="meta-value">创始人 · 独立运营</div></div>
   </div>
 </div>
 
-<!-- LONG IMAGE -->
-<img src="images/portfolio1.png" alt="奇什么怪品牌设计" class="project-image">
+<div class="image-wrap">
+  <img src="images/portfolio1.png" alt="奇什么怪品牌设计" class="project-image">
 
-<!-- DATA SECTION -->
-<div class="data-section">
-  <p class="section-eyebrow">Data Results · 数据成果</p>
-  <h2 class="section-title">从 0 到 2000+<br>用内容驱动真实转化</h2>
-
-  <div class="metrics-grid">
-    <div class="metric-group">
-      <div class="metric-group-label">内容力 · Content</div>
-      <div class="metric-item">
-        <div class="metric-num">5w<span class="metric-unit">+</span></div>
-        <div class="metric-desc">话题标签热度</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-num">1200<span class="metric-unit">+</span></div>
-        <div class="metric-desc">单篇最高点赞+收藏</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-num">43<span class="metric-unit">篇</span></div>
-        <div class="metric-desc">累计发布笔记</div>
-      </div>
-    </div>
-
-    <div class="metric-group">
-      <div class="metric-group-label">商业力 · Commerce</div>
-      <div class="metric-item">
-        <div class="metric-num">2000<span class="metric-unit">+</span></div>
-        <div class="metric-desc">累计销量</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-num">95<span class="metric-unit">%</span></div>
-        <div class="metric-desc">商品好评率</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-num">4.8<span class="metric-unit">/5</span></div>
-        <div class="metric-desc">服务综合评分</div>
-      </div>
-    </div>
-
-    <div class="metric-group">
-      <div class="metric-group-label">用户力 · Audience</div>
-      <div class="metric-item">
-        <div class="metric-num">60.6<span class="metric-unit">%</span></div>
-        <div class="metric-desc">一线+新一线城市占比</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-num">29<span class="metric-unit">省</span></div>
-        <div class="metric-desc">收货地址覆盖省份</div>
-      </div>
-      <div class="metric-item">
-        <div class="metric-num">18<span class="metric-unit">–34</span></div>
-        <div class="metric-desc">核心用户年龄段</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="highlight-bar">
-    💡 以上数据均来自<strong>小红书店铺真实后台</strong>，不依赖粉丝数量——用内容质量和用户洞察驱动<strong>真实商业转化</strong>。
-  </div>
-</div>
-
-<!-- MAP SECTION -->
-<div class="map-section">
-  <p class="section-eyebrow">Audience Distribution · 买家分布</p>
-  <h2 class="section-title">真实订单<br>覆盖全国 29 省</h2>
-  <div class="map-embed">
+  <!-- 框1: 收货地址分布地图 -->
+  <div class="overlay overlay-map">
     <iframe src="buyer_map.html" scrolling="no"></iframe>
   </div>
+
+  <!-- 框2: 数据成果 -->
+  <div class="overlay overlay-data">
+    <div class="metrics-inline">
+      <div class="mg">
+        <div class="mg-label">内容力 · Content</div>
+        <div class="mg-items">
+          <div class="mi"><span class="mn">5w<span class="mu">+</span></span><span class="md">话题标签热度</span></div>
+          <div class="mi"><span class="mn">1200<span class="mu">+</span></span><span class="md">单篇最高互动</span></div>
+          <div class="mi"><span class="mn">43<span class="mu">篇</span></span><span class="md">累计发布笔记</span></div>
+        </div>
+      </div>
+      <div class="mg">
+        <div class="mg-label">商业力 · Commerce</div>
+        <div class="mg-items">
+          <div class="mi"><span class="mn">2000<span class="mu">+</span></span><span class="md">累计销量</span></div>
+          <div class="mi"><span class="mn">95<span class="mu">%</span></span><span class="md">商品好评率</span></div>
+          <div class="mi"><span class="mn">4.8<span class="mu">/5</span></span><span class="md">服务综合评分</span></div>
+        </div>
+      </div>
+      <div class="mg">
+        <div class="mg-label">用户力 · Audience</div>
+        <div class="mg-items">
+          <div class="mi"><span class="mn">60.6<span class="mu">%</span></span><span class="md">一线+新一线占比</span></div>
+          <div class="mi"><span class="mn">29<span class="mu">省</span></span><span class="md">收货覆盖省份</span></div>
+          <div class="mi"><span class="mn">18<span class="mu">–34</span></span><span class="md">核心用户年龄段</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- BACK -->
 <div class="back-section">
   <a href="index.html" class="back-link">
-    <span class="back-line"></span>
-    返回作品集
+    <span class="back-line"></span>返回作品集
   </a>
 </div>
 
 <script>
-const items = document.querySelectorAll('.metric-item');
+const items = document.querySelectorAll('.mi');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
   });
-}, { threshold: 0.2 });
-items.forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.07}s`;
-  observer.observe(el);
-});
+}, { threshold: 0.1 });
+items.forEach((el, i) => { el.style.transitionDelay = `${i * 0.06}s`; observer.observe(el); });
 </script>
-
 </body>
 </html>
