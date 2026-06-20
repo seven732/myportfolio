@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>奇什么怪 · 数据成果</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --pink:    #ff85c0;
+    --pink-dim: rgba(255,133,192,0.12);
+    --pink-mid: rgba(255,133,192,0.35);
+    --bg:      #0f0f14;
+    --surface: #15151e;
+    --border:  #1e1e2c;
+    --text:    #e8e8f0;
+    --muted:   #555568;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    padding: 64px 64px 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--pink);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .page-title {
+    font-size: 42px;
+    font-weight: 200;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .page-title strong {
+    font-weight: 700;
+    color: var(--pink);
+  }
+
+  .tagline {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  .page-num {
+    font-size: 80px;
+    font-weight: 800;
+    color: #1a1a26;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    margin: 40px 64px 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--pink) 0%, var(--border) 60%);
+  }
+
+  /* ── METRICS GRID ── */
+  .metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    margin: 48px 64px 0;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .metric-group {
+    background: var(--surface);
+    padding: 32px 28px;
+  }
+
+  .metric-group-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--pink);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metric-item {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .metric-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .metric-item:last-child { margin-bottom: 0; }
+
+  .metric-num {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .metric-num .unit {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .metric-num .accent { color: var(--pink); }
+
+  .metric-desc {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    flex: 1;
+  }
+
+  /* ── HIGHLIGHT BAR ── */
+  .highlight {
+    margin: 24px 64px 0;
+    background: var(--pink-dim);
+    border: 1px solid var(--pink-mid);
+    border-radius: 10px;
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .highlight-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .highlight-text {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .highlight-text em {
+    color: var(--pink);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin: 40px 64px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footnote {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .tags {
+    display: flex;
+    gap: 8px;
+  }
+
+  .tag {
+    background: var(--pink-dim);
+    border: 1px solid var(--pink-mid);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    color: var(--pink);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── COUNT-UP ANIMATION ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-header, .highlight, .page-footer {
+    animation: fadeUp 0.6s ease both;
+  }
+  .page-header { animation-delay: 0.05s; }
+  .highlight   { animation-delay: 0.2s; }
+  .page-footer { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div>
+    <div class="eyebrow">奇什么怪 · Data Results</div>
+    <h1 class="page-title">从 0 到 <strong>2000+</strong><br>用内容驱动真实转化</h1>
+    <p class="tagline">基于小红书真实运营数据 · 2026.05 – 2026.06</p>
+  </div>
+  <div class="page-num">04</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- METRICS GRID -->
+<div class="metrics">
+
+  <!-- 内容力 -->
+  <div class="metric-group">
+    <div class="metric-group-label">内容力 · Content</div>
+
+    <div class="metric-item">
+      <div class="metric-num"><span class="accent">5</span>w<span class="unit">+</span></div>
+      <div class="metric-desc">话题标签热度</div>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-num">1200<span class="unit">+</span></div>
+      <div class="metric-desc">单篇最高点赞+收藏</div>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-num">43<span class="unit">篇</span></div>
+      <div class="metric-desc">累计发布笔记</div>
+    </div>
+  </div>
+
+  <!-- 商业力 -->
+  <div class="metric-group">
+    <div class="metric-group-label">商业力 · Commerce</div>
+
+    <div class="metric-item">
+      <div class="metric-num">2000<span class="unit">+</span></div>
+      <div class="metric-desc">累计销量（单）</div>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-num"><span class="accent">95</span><span class="unit">%</span></div>
+      <div class="metric-desc">商品好评率</div>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-num">4.8<span class="unit">/5</span></div>
+      <div class="metric-desc">服务综合评分</div>
+    </div>
+  </div>
+
+  <!-- 用户力 -->
+  <div class="metric-group">
+    <div class="metric-group-label">用户力 · Audience</div>
+
+    <div class="metric-item">
+      <div class="metric-num"><span class="accent">60.6</span><span class="unit">%</span></div>
+      <div class="metric-desc">一线+新一线城市占比</div>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-num">29<span class="unit">省</span></div>
+      <div class="metric-desc">收货地址覆盖省份</div>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-num">18<span class="unit">–34</span></div>
+      <div class="metric-desc">核心用户年龄段</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- HIGHLIGHT -->
+<div class="highlight">
+  <div class="highlight-icon">💡</div>
+  <div class="highlight-text">
+    以上数据均来自<em>小红书店铺真实后台</em>，
+    不依赖粉丝数量——用内容质量和用户洞察驱动<em>真实商业转化</em>，
+    是这段经历最核心的价值。
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <div class="footnote">数据截止 2026.06 · 已排除已取消订单</div>
+  <div class="tags">
+    <span class="tag">真实落地</span>
+    <span class="tag">独立运营</span>
+    <span class="tag">内容驱动转化</span>
+  </div>
+</div>
+
+<script>
+  // Stagger metric items on scroll
+  const items = document.querySelectorAll('.metric-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  items.forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
