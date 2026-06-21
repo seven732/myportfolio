@@ -40,19 +40,35 @@ nav {
 
 /* 框1: 收货地址 */
 .overlay-map {
-  top: 36%; left: 28%; width: 39.05%; height: 7.95%;
-  background: #fff;
+  top: 39.70%; left: 34.34%; width: 39.05%; height: 7.95%;
+  background: #0f0f14;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
 }
-/* iframe缩小适配 */
-.overlay-map iframe {
-  width: 250%;
-  height: 250%;
-  border: none;
-  display: block;
-  transform: scale(0.4);
-  transform-origin: top left;
-  pointer-events: auto;
+.map-inner {
+  width: 100%; height: 100%;
+  position: relative;
+  display: flex; flex-direction: column;
+  padding: 3% 4%;
 }
+.map-title {
+  font-size: clamp(6px, 0.8vw, 11px);
+  color: #ff85c0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2%;
+}
+.map-stats {
+  display: flex; gap: 6%; align-items: flex-end; flex: 1;
+}
+.map-stat { display: flex; flex-direction: column; gap: 2%; }
+.map-num { font-family: var(--serif); font-size: clamp(10px, 1.6vw, 22px); color: #ff85c0; line-height: 1; }
+.map-label { font-size: clamp(5px, 0.55vw, 8px); color: #666; }
+.map-dots {
+  flex: 1; position: relative; align-self: stretch;
+}
+/* China map dots SVG inline */
+.map-china { width: 100%; height: 100%; }
 
 /* 框2: 数据成果 */
 .overlay-data {
@@ -76,21 +92,17 @@ nav {
   border-bottom: 1px solid var(--line); padding-bottom: 4%; margin-bottom: 3%;
 }
 .mg-items { display: flex; flex-direction: column; justify-content: space-around; flex: 1; gap: 2%; }
-
 .mi {
   display: flex; flex-direction: column; gap: 2%;
   opacity: 0; transform: translateY(4px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 .mi.visible { opacity: 1; transform: translateY(0); }
-
 .mi-top { display: flex; align-items: baseline; gap: 3%; }
 .mn { font-family: var(--serif); font-size: clamp(9px, 1.4vw, 18px); line-height: 1; color: var(--black); }
 .mu { font-size: clamp(6px, 0.7vw, 10px); color: var(--gray); }
 .md { font-size: clamp(5px, 0.55vw, 8px); color: var(--gray); margin-left: auto; }
-
-/* 进度条 */
-.bar-wrap { width: 100%; height: clamp(2px, 0.25vw, 3px); background: #f0f0f0; border-radius: 2px; overflow: hidden; }
+.bar-wrap { width: 100%; height: clamp(2px, 0.2vw, 3px); background: #f0f0f0; border-radius: 2px; overflow: hidden; }
 .bar-fill { height: 100%; background: var(--pink); border-radius: 2px; width: 0%; transition: width 1s cubic-bezier(0.4,0,0.2,1); }
 
 .back-section { padding: 4rem 3.5rem; border-top: 1px solid var(--line); }
@@ -131,15 +143,59 @@ nav {
 <div class="image-wrap">
   <img src="images/portfolio1.png" alt="奇什么怪品牌设计" class="project-image">
 
-  <!-- 框1: 收货地址分布地图 -->
-  <div class="overlay overlay-map">
-    <iframe src="buyer_map.html" scrolling="no"></iframe>
+  <!-- 框1: 买家分布 — 静态卡片 -->
+  <div class="overlay overlay-map" onclick="window.open('buyer_map.html','_blank')" title="点击查看完整地图">
+    <div class="map-inner">
+      <div class="map-title">买家城市分布 · Buyer Distribution</div>
+      <div class="map-stats">
+        <div class="map-stat">
+          <div class="map-num">388</div>
+          <div class="map-label">有效订单</div>
+        </div>
+        <div class="map-stat">
+          <div class="map-num">29</div>
+          <div class="map-label">覆盖省份</div>
+        </div>
+        <div class="map-stat">
+          <div class="map-num">60.6%</div>
+          <div class="map-label">一线+新一线</div>
+        </div>
+        <div class="map-stat">
+          <div class="map-num">#1</div>
+          <div class="map-label">广东 · 67单</div>
+        </div>
+        <!-- 简单气泡图 -->
+        <div class="map-dots">
+          <svg class="map-china" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+            <rect width="200" height="120" fill="transparent"/>
+            <!-- 主要省份气泡 按经纬度近似 -->
+            <circle cx="148" cy="82" r="10" fill="#ff85c0" opacity="0.85"/> <!-- 广东 -->
+            <circle cx="151" cy="65" r="8" fill="#ff85c0" opacity="0.7"/> <!-- 江苏 -->
+            <circle cx="155" cy="68" r="7" fill="#ff85c0" opacity="0.65"/> <!-- 上海 -->
+            <circle cx="153" cy="62" r="6.5" fill="#ff85c0" opacity="0.6"/> <!-- 浙江 -->
+            <circle cx="148" cy="52" r="6" fill="#ff85c0" opacity="0.6"/> <!-- 北京 -->
+            <circle cx="145" cy="66" r="5.5" fill="#ff85c0" opacity="0.55"/> <!-- 河南 -->
+            <circle cx="149" cy="57" r="5" fill="#ff85c0" opacity="0.5"/> <!-- 山东 -->
+            <circle cx="143" cy="67" r="5" fill="#ff85c0" opacity="0.5"/> <!-- 湖北 -->
+            <circle cx="152" cy="74" r="5" fill="#ff85c0" opacity="0.5"/> <!-- 福建 -->
+            <circle cx="130" cy="70" r="5" fill="#ff85c0" opacity="0.5"/> <!-- 四川 -->
+            <circle cx="150" cy="62" r="4.5" fill="#ff85c0" opacity="0.45"/> <!-- 安徽 -->
+            <circle cx="147" cy="55" r="4" fill="#ff85c0" opacity="0.4"/> <!-- 河北 -->
+            <circle cx="122" cy="78" r="4" fill="#ff85c0" opacity="0.4"/> <!-- 云南 -->
+            <circle cx="162" cy="42" r="3.5" fill="#ff85c0" opacity="0.35"/> <!-- 黑龙江 -->
+            <!-- 标注TOP3 -->
+            <text x="148" y="96" text-anchor="middle" fill="#ff85c0" font-size="5">粤</text>
+            <text x="151" y="78" text-anchor="middle" fill="#ff85c0" font-size="4.5">苏</text>
+            <text x="155" y="81" text-anchor="middle" fill="#ff85c0" font-size="4.5">沪</text>
+          </svg>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- 框2: 数据成果 -->
   <div class="overlay overlay-data">
     <div class="metrics-inline">
-
       <div class="mg">
         <div class="mg-label">内容力 · Content</div>
         <div class="mg-items">
@@ -157,7 +213,6 @@ nav {
           </div>
         </div>
       </div>
-
       <div class="mg">
         <div class="mg-label">商业力 · Commerce</div>
         <div class="mg-items">
@@ -175,7 +230,6 @@ nav {
           </div>
         </div>
       </div>
-
       <div class="mg">
         <div class="mg-label">用户力 · Audience</div>
         <div class="mg-items">
@@ -193,7 +247,6 @@ nav {
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -206,8 +259,6 @@ nav {
 
 <script>
 const items = document.querySelectorAll('.mi');
-const bars = document.querySelectorAll('.bar-fill');
-
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -218,11 +269,7 @@ const observer = new IntersectionObserver(entries => {
     }
   });
 }, { threshold: 0.1 });
-
-items.forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.06}s`;
-  observer.observe(el);
-});
+items.forEach((el, i) => { el.style.transitionDelay = `${i * 0.06}s`; observer.observe(el); });
 </script>
 </body>
 </html>
