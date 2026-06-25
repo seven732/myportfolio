@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI设计 · 纳爱斯小程序 — Jseven</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #FFFFFF; --black: #111111; --gray: #767676; --line: #E8E8E8;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+body { background: var(--white); color: var(--black); font-family: var(--sans); font-weight: 300; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.75rem 3.5rem;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--black); text-decoration: none; }
+.nav-back { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--black); }
+
+/* HERO */
+.project-hero { padding: 8rem 3.5rem 4rem; border-bottom: 1px solid var(--line); }
+.project-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.5rem; }
+.project-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.05; margin-bottom: 2rem; }
+.project-meta { display: flex; gap: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.meta-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem; }
+.meta-value { font-size: 0.88rem; color: var(--black); }
+
+/* THREE COLUMN UI SCREENS */
+.screens-section { padding: 5rem 3.5rem; border-bottom: 1px solid var(--line); }
+.screens-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+}
+.screen-item { display: flex; flex-direction: column; gap: 1rem; }
+.screen-item:nth-child(2) { transform: translateY(-3rem); }
+.screen-item img {
+  width: 100%; display: block;
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.screen-item img:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.14);
+}
+
+/* MARQUEE SCROLL */
+.marquee-section { padding: 4rem 0; border-bottom: 1px solid var(--line); overflow: hidden; }
+.marquee-label {
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gray); margin-bottom: 2rem; padding-left: 3.5rem;
+}
+.marquee-track { display: flex; flex-direction: column; gap: 1.5rem; }
+.marquee-row { display: flex; gap: 1.5rem; width: max-content; }
+.marquee-row.reverse { animation: scrollLeft 30s linear infinite; }
+.marquee-row.forward { animation: scrollRight 30s linear infinite; }
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.mock-item {
+  flex-shrink: 0;
+  width: 140px;
+}
+.mock-item img {
+  width: 100%; display: block;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* BACK */
+.back-section { padding: 4rem 3.5rem; border-top: 1px solid var(--line); }
+.back-link {
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.75rem; transition: color 0.2s;
+}
+.back-link:hover { color: var(--black); }
+.back-line { width: 3rem; height: 1px; background: currentColor; transition: width 0.3s; }
+.back-link:hover .back-line { width: 5rem; }
+
+@media (max-width: 768px) {
+  nav { padding: 1.25rem 1.5rem; }
+  .project-hero { padding: 7rem 1.5rem 3rem; }
+  .screens-section { padding: 3rem 1.5rem; }
+  .screens-grid { gap: 1rem; }
+  .screen-item:nth-child(2) { transform: translateY(-1.5rem); }
+  .mock-item { width: 100px; }
+  .back-section { padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Jseven</a>
+  <a href="index.html" class="nav-back">← 返回作品集</a>
+</nav>
+
+<div class="project-hero">
+  <p class="project-label">02 · UI 设计</p>
+  <h1 class="project-title">纳爱斯小程序<br><em style="font-style:italic;color:var(--gray);">Nais Mini Program</em></h1>
+  <div class="project-meta">
+    <div><div class="meta-label">类型</div><div class="meta-value">UI设计 · 交互设计</div></div>
+    <div><div class="meta-label">时间</div><div class="meta-value">2026.06</div></div>
+    <div><div class="meta-label">工具</div><div class="meta-value">AI · 即时设计</div></div>
+    <div><div class="meta-label">角色</div><div class="meta-value">负责人</div></div>
+  </div>
+</div>
+
+<!-- THREE UI SCREENS -->
+<div class="screens-section">
+  <div class="screens-grid">
+    <div class="screen-item">
+      <img src="images/ui1.png" alt="UI界面1">
+    </div>
+    <div class="screen-item">
+      <img src="images/ui2.png" alt="UI界面2">
+    </div>
+    <div class="screen-item">
+      <img src="images/ui3.png" alt="UI界面3">
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE MOCKUPS -->
+<div class="marquee-section">
+  <div class="marquee-label">界面展示 · All Screens</div>
+  <div class="marquee-track">
+
+    <!-- 第一排：mock1-10 向左滚动 -->
+    <div class="marquee-row reverse">
+      <div class="mock-item"><img src="images/mock1.png" alt="mock1"></div>
+      <div class="mock-item"><img src="images/mock2.png" alt="mock2"></div>
+      <div class="mock-item"><img src="images/mock3.png" alt="mock3"></div>
+      <div class="mock-item"><img src="images/mock4.png" alt="mock4"></div>
+      <div class="mock-item"><img src="images/mock5.png" alt="mock5"></div>
+      <div class="mock-item"><img src="images/mock6.png" alt="mock6"></div>
+      <div class="mock-item"><img src="images/mock7.png" alt="mock7"></div>
+      <div class="mock-item"><img src="images/mock8.png" alt="mock8"></div>
+      <div class="mock-item"><img src="images/mock9.png" alt="mock9"></div>
+      <div class="mock-item"><img src="images/mock10.png" alt="mock10"></div>
+      <!-- 复制一遍实现无缝循环 -->
+      <div class="mock-item"><img src="images/mock1.png" alt="mock1"></div>
+      <div class="mock-item"><img src="images/mock2.png" alt="mock2"></div>
+      <div class="mock-item"><img src="images/mock3.png" alt="mock3"></div>
+      <div class="mock-item"><img src="images/mock4.png" alt="mock4"></div>
+      <div class="mock-item"><img src="images/mock5.png" alt="mock5"></div>
+      <div class="mock-item"><img src="images/mock6.png" alt="mock6"></div>
+      <div class="mock-item"><img src="images/mock7.png" alt="mock7"></div>
+      <div class="mock-item"><img src="images/mock8.png" alt="mock8"></div>
+      <div class="mock-item"><img src="images/mock9.png" alt="mock9"></div>
+      <div class="mock-item"><img src="images/mock10.png" alt="mock10"></div>
+    </div>
+
+    <!-- 第二排：mock11-20 向右滚动 -->
+    <div class="marquee-row forward">
+      <div class="mock-item"><img src="images/mock11.png" alt="mock11"></div>
+      <div class="mock-item"><img src="images/mock12.png" alt="mock12"></div>
+      <div class="mock-item"><img src="images/mock13.png" alt="mock13"></div>
+      <div class="mock-item"><img src="images/mock14.png" alt="mock14"></div>
+      <div class="mock-item"><img src="images/mock15.png" alt="mock15"></div>
+      <div class="mock-item"><img src="images/mock16.png" alt="mock16"></div>
+      <div class="mock-item"><img src="images/mock17.png" alt="mock17"></div>
+      <div class="mock-item"><img src="images/mock18.png" alt="mock18"></div>
+      <div class="mock-item"><img src="images/mock19.png" alt="mock19"></div>
+      <div class="mock-item"><img src="images/mock20.png" alt="mock20"></div>
+      <!-- 复制一遍 -->
+      <div class="mock-item"><img src="images/mock11.png" alt="mock11"></div>
+      <div class="mock-item"><img src="images/mock12.png" alt="mock12"></div>
+      <div class="mock-item"><img src="images/mock13.png" alt="mock13"></div>
+      <div class="mock-item"><img src="images/mock14.png" alt="mock14"></div>
+      <div class="mock-item"><img src="images/mock15.png" alt="mock15"></div>
+      <div class="mock-item"><img src="images/mock16.png" alt="mock16"></div>
+      <div class="mock-item"><img src="images/mock17.png" alt="mock17"></div>
+      <div class="mock-item"><img src="images/mock18.png" alt="mock18"></div>
+      <div class="mock-item"><img src="images/mock19.png" alt="mock19"></div>
+      <div class="mock-item"><img src="images/mock20.png" alt="mock20"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="back-section">
+  <a href="index.html" class="back-link">
+    <span class="back-line"></span>返回作品集
+  </a>
+</div>
+
+</body>
+</html>
