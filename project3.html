@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>香氛品牌视觉识别手册 — Jseven</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #FFFFFF; --black: #111111; --gray: #767676; --line: #E8E8E8;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+body { background: var(--white); color: var(--black); font-family: var(--sans); font-weight: 300; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.75rem 3.5rem;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo { font-family: var(--serif); font-size: 1.25rem; color: var(--black); text-decoration: none; }
+.nav-back { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--black); }
+
+/* HERO */
+.project-hero { padding: 8rem 3.5rem 4rem; border-bottom: 1px solid var(--line); }
+.project-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.5rem; }
+.project-title { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; line-height: 1.05; margin-bottom: 2rem; }
+.project-meta { display: flex; gap: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.meta-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.4rem; }
+.meta-value { font-size: 0.88rem; color: var(--black); }
+
+/* PRODUCT STAGE */
+.stage-section {
+  padding: 5rem 3.5rem 3rem;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+.stage-eyebrow {
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gray); margin-bottom: 3rem;
+}
+
+/* 产品展示台 */
+.stage {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  margin: 0 auto;
+}
+
+.item {
+  position: absolute;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.item:hover { transform: translateY(-12px) !important; }
+.item img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+/* 后排：购物袋 */
+.item-bag1 { /* item4 蓝购物袋 */
+  width: 22%; left: 5%; top: 0%;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.22));
+  z-index: 1;
+}
+.item-bag2 { /* item5 白购物袋 */
+  width: 22%; left: 40%; top: 0%;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.22));
+  z-index: 1;
+}
+
+/* 中排：纸盒 */
+.item-box1 { /* item1 绿盒 */
+  width: 9%; left: 1%; top: 38%;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.16));
+  z-index: 2;
+}
+.item-box2 { /* item2 白盒 */
+  width: 10%; left: 12%; top: 30%;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.16));
+  z-index: 2;
+}
+.item-box3 { /* item3 蓝盒 */
+  width: 10%; left: 24%; top: 22%;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.16));
+  z-index: 2;
+}
+.item-poster { /* item13 海报 */
+  width: 14%; left: 36%; top: 28%;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.14));
+  z-index: 2;
+}
+/* 香水瓶 */
+.item-bottle1 { /* item6 绿高瓶 */
+  width: 8%; left: 63%; top: 20%;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.16));
+  z-index: 2;
+}
+.item-bottle2 { /* item7 白瓶 */
+  width: 8%; left: 73%; top: 25%;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.16));
+  z-index: 2;
+}
+.item-bottle3 { /* item8 蓝瓶 */
+  width: 8%; left: 82%; top: 30%;
+  filter: drop-shadow(0 12px 20px rgba(0,0,0,0.16));
+  z-index: 2;
+}
+
+/* 前排：杯垫 */
+.item-coaster1 { /* item9 黄圆 */
+  width: 13%; left: 30%; top: 62%;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1));
+  z-index: 3;
+}
+.item-coaster2 { /* item10 蓝圆 */
+  width: 13%; left: 20%; top: 58%;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1));
+  z-index: 3;
+}
+.item-coaster3 { /* item11 黄圆 */
+  width: 12%; left: 50%; top: 60%;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1));
+  z-index: 3;
+}
+.item-coaster4 { /* item12 蓝圆 */
+  width: 12%; left: 64%; top: 58%;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.1));
+  z-index: 3;
+}
+
+/* BRAND MANUAL - 图片往下排 */
+.manual-section {
+  padding: 5rem 3.5rem;
+}
+.manual-eyebrow {
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gray); margin-bottom: 3rem;
+}
+.manual-pages {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.manual-page {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.manual-page.visible { opacity: 1; transform: translateY(0); }
+
+/* BACK */
+.back-section { padding: 4rem 3.5rem; border-top: 1px solid var(--line); }
+.back-link {
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gray); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 0.75rem; transition: color 0.2s;
+}
+.back-link:hover { color: var(--black); }
+.back-line { width: 3rem; height: 1px; background: currentColor; transition: width 0.3s; }
+.back-link:hover .back-line { width: 5rem; }
+
+@media (max-width: 768px) {
+  nav { padding: 1.25rem 1.5rem; }
+  .project-hero { padding: 7rem 1.5rem 3rem; }
+  .stage-section, .manual-section { padding: 3rem 1.5rem; }
+  .stage { height: 320px; }
+  .back-section { padding: 3rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Jseven</a>
+  <a href="index.html" class="nav-back">← 返回作品集</a>
+</nav>
+
+<div class="project-hero">
+  <p class="project-label">03 · 品牌设计</p>
+  <h1 class="project-title">本草芳香氛<br><em style="font-style:italic;color:var(--gray);">Bencao Aroma</em></h1>
+  <div class="project-meta">
+    <div><div class="meta-label">类型</div><div class="meta-value">品牌设计 · VI手册 · 视觉系统</div></div>
+    <div><div class="meta-label">时间</div><div class="meta-value">2026.05</div></div>
+    <div><div class="meta-label">工具</div><div class="meta-value">AI · PS</div></div>
+    <div><div class="meta-label">角色</div><div class="meta-value">负责人</div></div>
+  </div>
+</div>
+
+<!-- PRODUCT STAGE -->
+<div class="stage-section">
+  <p class="stage-eyebrow">Product · 产品展示</p>
+  <div class="stage">
+    <!-- 后排：购物袋 -->
+    <div class="item item-bag1"><img src="images/item4.png" alt="蓝购物袋" loading="lazy"></div>
+    <div class="item item-bag2"><img src="images/item5.png" alt="白购物袋" loading="lazy"></div>
+    <!-- 中排：纸盒 -->
+    <div class="item item-box1"><img src="images/item1.png" alt="绿盒" loading="lazy"></div>
+    <div class="item item-box2"><img src="images/item2.png" alt="白盒" loading="lazy"></div>
+    <div class="item item-box3"><img src="images/item3.png" alt="蓝盒" loading="lazy"></div>
+    <!-- 海报 -->
+    <div class="item item-poster"><img src="images/item13.png" alt="海报" loading="lazy"></div>
+    <!-- 香水瓶 -->
+    <div class="item item-bottle1"><img src="images/item6.png" alt="绿高瓶" loading="lazy"></div>
+    <div class="item item-bottle2"><img src="images/item7.png" alt="白瓶" loading="lazy"></div>
+    <div class="item item-bottle3"><img src="images/item8.png" alt="蓝瓶" loading="lazy"></div>
+    <!-- 前排：杯垫 -->
+    <div class="item item-coaster1"><img src="images/item9.png" alt="黄圆杯垫" loading="lazy"></div>
+    <div class="item item-coaster2"><img src="images/item10.png" alt="蓝圆杯垫" loading="lazy"></div>
+    <div class="item item-coaster3"><img src="images/item11.png" alt="黄圆杯垫" loading="lazy"></div>
+    <div class="item item-coaster4"><img src="images/item12.png" alt="蓝圆杯垫" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- BRAND MANUAL PAGES -->
+<div class="manual-section">
+  <p class="manual-eyebrow">Brand Identity · 品牌视觉识别手册</p>
+  <div class="manual-pages">
+    <img src="images/page1.png" alt="手册第1页" class="manual-page" loading="lazy">
+    <img src="images/page2.png" alt="手册第2页" class="manual-page" loading="lazy">
+    <img src="images/page3.png" alt="手册第3页" class="manual-page" loading="lazy">
+    <img src="images/page4.png" alt="手册第4页" class="manual-page" loading="lazy">
+    <img src="images/page5.png" alt="手册第5页" class="manual-page" loading="lazy">
+    <img src="images/page6.png" alt="手册第6页" class="manual-page" loading="lazy">
+    <img src="images/page7.png" alt="手册第7页" class="manual-page" loading="lazy">
+    <img src="images/page8.png" alt="手册第8页" class="manual-page" loading="lazy">
+    <img src="images/page9.png" alt="手册第9页" class="manual-page" loading="lazy">
+    <img src="images/page10.png" alt="手册第10页" class="manual-page" loading="lazy">
+    <img src="images/page11.png" alt="手册第11页" class="manual-page" loading="lazy">
+    <img src="images/page12.png" alt="手册第12页" class="manual-page" loading="lazy">
+    <img src="images/page13.png" alt="手册第13页" class="manual-page" loading="lazy">
+    <img src="images/page14.png" alt="手册第14页" class="manual-page" loading="lazy">
+    <img src="images/page15.png" alt="手册第15页" class="manual-page" loading="lazy">
+    <img src="images/page16.png" alt="手册第16页" class="manual-page" loading="lazy">
+    <img src="images/page17.png" alt="手册第17页" class="manual-page" loading="lazy">
+    <img src="images/page18.png" alt="手册第18页" class="manual-page" loading="lazy">
+    <img src="images/page19.png" alt="手册第19页" class="manual-page" loading="lazy">
+    <img src="images/page20.png" alt="手册第20页" class="manual-page" loading="lazy">
+  </div>
+</div>
+
+<div class="back-section">
+  <a href="index.html" class="back-link">
+    <span class="back-line"></span>返回作品集
+  </a>
+</div>
+
+<script>
+const pages = document.querySelectorAll('.manual-page');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+pages.forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.05}s`;
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
